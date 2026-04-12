@@ -151,11 +151,13 @@ const renderFilterLists = ( ) => {
         const on = dom.cl.has(listEntry, 'checked');
         const checkbox = qs$(listEntry, ':scope > .detailbar input');
         dom.prop(checkbox, 'checked', on);
-        if ( checkbox ) {
-            checkbox.addEventListener('change', () => {
-                try { calculateEntropy(); } catch (e) {}
-            });
+        /// >>> 8INF886
+        if (checkbox) {
+            checkbox.addEventListener('change', () =>
+                calculateEntropy()
+            );
         }
+        /// <<< 8INF886
         let elem = qs$(listEntry, ':scope > .detailbar a.content');
         dom.attr(elem, 'href', 'asset-viewer.html?url=' + encodeURIComponent(listkey));
         dom.attr(elem, 'type', 'text/html');
