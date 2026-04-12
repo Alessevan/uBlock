@@ -11,11 +11,27 @@
 <link rel="stylesheet" type="text/css" href="css/dashboard-common.css">
 <link rel="stylesheet" type="text/css" href="css/cloud-ui.css">
 <link rel="stylesheet" type="text/css" href="css/3p-filters.css">
+<!-- >>> 8INF886 -->
+<style>
+  /* Styling for the entropy indicators and warning banner */
+  .entropy-label { font-size: 0.85em; color: #d9534f; margin-left: 8px; font-weight: bold; }
+  #uniqueness-banner { padding: 12px; background: #fff3cd; color: #856404; text-align: center; border-bottom: 1px solid #ffeeba; font-size: 1.1em; }
+  #uniqueness-banner strong { color: #d9534f; }
+</style>
+<!-- <<< 8INF886 -->
 </head>
 
 <body>
 
 <div class="body">
+<!-- >>> 8INF886 -->
+  <div id="uniqueness-banner">
+    <span data-i18n="uniquenessBanner">
+        Your Entropy: <strong id="total-entropy">0.00</strong> bits.
+        (~1 in <strong id="population-uniqueness">5 890</strong> users the exact same configuration).
+    </span>
+  </div>
+<!-- <<< 8INF886 -->
 
 <div id="cloudWidget" class="hide" data-cloud-entry="tpFiltersPane"></div>
 <p id="actions">

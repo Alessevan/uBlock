@@ -32,6 +32,45 @@ const recentlyUpdated = 1 * 60 * 60 * 1000; // 1 hour
 
 let listsetDetails = {};
 
+/// >>> 8INF886
+const filterProbabilities = {
+    'ublock-filters': 0.99,
+    'easylist': 0.95,
+    'easyprivacy': 0.85,
+    'adguard-spyware': 0.15,
+    'fanboy-annoyance': 0.20,
+    'plowe-0': 0.30,
+    'dpollock-0': 0.10,
+    '_default': 0.01
+};
+
+function calculateEntropy() {
+    try {
+        let totalBits = 0;
+        const container = qs$('#lists');
+        if (!container) { return; }
+
+        const checkboxes = container.querySelectorAll('.listEntry input[type="checkbox"]:checked');
+
+        checkboxes.forEach(checkBox => {
+            const listEl = checkBox.closest('.listEntry');
+            const key = listEl && listEl.dataset && listEl.dataset.key || '';
+            const prob = filterProbabilities[key] || filterProbabilities['_default'];
+            const p = prob ?? 1;
+            totalBits += -Math.log2(p);
+        });
+
+        const totalEntropyEl = qs$('#total-entropy');
+        const populationUniqEl = qs$('#population-uniqueness');
+
+        totalEntropyEl.textContent = totalBits.toFixed(2);
+        populationUniqEl.textContent = 5890 + Math.round(-Math.log2(filterProbabilities['_default']) * Math.LOG10E) - Math.round(totalBits * Math.LOG10E);
+    } catch (e) {
+        console.log(e);
+    }
+}
+/// <<< 8INF886
+
 /******************************************************************************/
 
 onBroadcast(msg => {
@@ -110,7 +149,13 @@ const renderFilterLists = ( ) => {
             dom.cl.toggle(listEntry, 'checked', listDetails.off !== true);
         }
         const on = dom.cl.has(listEntry, 'checked');
-        dom.prop(qs$(listEntry, ':scope > .detailbar input'), 'checked', on);
+        const checkbox = qs$(listEntry, ':scope > .detailbar input');
+        dom.prop(checkbox, 'checked', on);
+        if ( checkbox ) {
+            checkbox.addEventListener('change', () => {
+                try { calculateEntropy(); } catch (e) {}
+            });
+        }
         let elem = qs$(listEntry, ':scope > .detailbar a.content');
         dom.attr(elem, 'href', 'asset-viewer.html?url=' + encodeURIComponent(listkey));
         dom.attr(elem, 'type', 'text/html');
@@ -494,6 +539,9 @@ const updateAncestorListNodes = (listEntry, fn) => {
 
 const onFilteringSettingsChanged = ( ) => {
     renderWidgets();
+/// >>> 8INF886
+    calculateEntropy();
+/// <<< 8INF886
 };
 
 dom.on('#parseCosmeticFilters', 'change', onFilteringSettingsChanged);
@@ -897,6 +945,8 @@ renderFilterLists().then(( ) => {
     if ( dom.cl.has(buttonUpdate, 'disabled') ) { return; }
     if ( listsetDetails.autoUpdate !== true ) { return; }
     buttonUpdateHandler();
-});
+/// >>> 8INF886
+}).then(() => calculateEntropy());
+/// <<< 8INF886
 
 /******************************************************************************/
