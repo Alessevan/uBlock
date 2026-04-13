@@ -33,6 +33,8 @@ const recentlyUpdated = 1 * 60 * 60 * 1000; // 1 hour
 let listsetDetails = {};
 
 /// >>> 8INF886
+
+// placeholder
 const filterProbabilities = {
     'ublock-filters': 0.99,
     'easylist': 0.95,
@@ -41,7 +43,7 @@ const filterProbabilities = {
     'fanboy-annoyance': 0.20,
     'plowe-0': 0.30,
     'dpollock-0': 0.10,
-    '_default': 0.01
+    '_default': 0.01,
 };
 
 function calculateEntropy() {
@@ -55,6 +57,7 @@ function calculateEntropy() {
         checkboxes.forEach(checkBox => {
             const listEl = checkBox.closest('.listEntry');
             const key = listEl && listEl.dataset && listEl.dataset.key || '';
+            console.log(key)
             const prob = filterProbabilities[key] || filterProbabilities['_default'];
             const p = prob ?? 1;
             totalBits += -Math.log2(p);
@@ -703,7 +706,7 @@ dom.on('#buttonUpdate', 'click', ( ) => { buttonUpdateHandler(); });
 
 /// >>> 8INF886
 const randomizeActivatedLists = ( ) => {
-    const leafEntries = qsa$('#lists .listEntry[data-role="leaf"]:not(.fromAdmin)');
+    const leafEntries = qsa$('#lists .listEntry[data-role="leaf"][data-parent="regions"]:not(.fromAdmin)');
     for ( const liEntry of leafEntries ) {
         const input = qs$(liEntry, ':scope > .detailbar input');
         if ( input === null ) { continue; }
