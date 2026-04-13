@@ -15,7 +15,7 @@
 <style>
   /* Styling for the entropy indicators and warning banner */
   .entropy-label { font-size: 0.85em; color: #d9534f; margin-left: 8px; font-weight: bold; }
-  #uniqueness-banner { padding: 12px; background: #fff3cd; color: #856404; text-align: center; border-bottom: 1px solid #ffeeba; font-size: 1.1em; }
+  #uniqueness-banner { z-index: 30; padding: 12px; background: #fff3cd; color: #856404; text-align: center; border-bottom: 1px solid #ffeeba; font-size: 1.1em; }
   #uniqueness-banner strong { color: #d9534f; }
 </style>
 <!-- <<< 8INF886 -->
@@ -25,22 +25,22 @@
 
 <div class="body">
 <!-- >>> 8INF886 -->
-  <div id="uniqueness-banner">
-    <span data-i18n="uniquenessBanner">
-        Your Entropy: <strong id="total-entropy">0.00</strong> bits.
-        (~1 in <strong id="population-uniqueness">5 890</strong> users share the exact same configuration).
-    </span>
-  </div>
 <!-- <<< 8INF886 -->
 
 <div id="cloudWidget" class="hide" data-cloud-entry="tpFiltersPane"></div>
-<p id="actions">
+<div id="actions">
     <button id="buttonApply" class="preferred disabled iconified dontshrink" type="button" data-i18n-title="3pApplyChanges"><span class="fa-icon">check</span><span data-i18n="3pApplyChanges">_</span><span class="hover"></span></button>
     <button id="buttonUpdate" class="preferred disabled iconified" type="button" data-i18n-title="3pUpdateNow"><span class="fa-icon">refresh</span><span data-i18n="3pUpdateNow">_</span><span class="hover"></span></button>
     <!-- >>> 8INF886 -->
-    <button id="buttonRandomize" class="iconified" type="button" data-i18n-title="3pRandomizeLists"><span class="fa-icon">random</span><span data-i18n="3pRandomizeLists">_</span><span class="hover"></span></button>
+    <button id="buttonRandomize" class="iconified" type="button" data-i18n-title="3pRandomizeLists"><span class="fa-icon">random</span><span data-i18n="3pRandom">_</span><span class="hover">countries</span></button>
+    <div id="uniqueness-banner">
+      <span data-i18n="uniquenessBanner">
+          Your Entropy: <strong id="total-entropy">0.00</strong> bits.
+          (~1 in <strong id="population-uniqueness">5 890</strong> users share the exact same configuration).
+      </span>
+    </div>
     <!-- <<< 8INF886 -->
-</p>
+</div>
 
 <div>
     <div class="li">

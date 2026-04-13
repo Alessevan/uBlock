@@ -435,6 +435,10 @@
     "message": "Update now",
     "description": "A button in the in the _3rd-party filters_ pane"
   },
+  "3pRandom": {
+    "message": "Randomize countries",
+    "description": "A button to randomize countries list filters"
+  },
   "3pPurgeAll": {
     "message": "Purge all caches",
     "description": "A button in the in the _3rd-party filters_ pane"
