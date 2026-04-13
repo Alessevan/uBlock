@@ -701,6 +701,27 @@ const buttonUpdateHandler = async ( ) => {
 
 dom.on('#buttonUpdate', 'click', ( ) => { buttonUpdateHandler(); });
 
+/// >>> 8INF886
+const randomizeActivatedLists = ( ) => {
+    const leafEntries = qsa$('#lists .listEntry[data-role="leaf"]:not(.fromAdmin)');
+    for ( const liEntry of leafEntries ) {
+        const input = qs$(liEntry, ':scope > .detailbar input');
+        if ( input === null ) { continue; }
+        const enable = Math.random() < 0.5;
+        input.checked = enable;
+        dom.cl.toggle(liEntry, 'checked', enable);
+
+        updateAncestorListNodes(liEntry, ancestor => {
+            updateListNode(ancestor);
+        });
+    }
+    renderWidgets();
+    // Trigger the normal change handling which updates entropy and other widgets
+    onFilteringSettingsChanged();
+};
+
+dom.on('#buttonRandomize', 'click', ( ) => { randomizeActivatedLists(); });
+/// <<< 8INF886
 /******************************************************************************/
 
 const userSettingCheckboxChanged = ( ) => {
