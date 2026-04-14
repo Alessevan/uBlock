@@ -66,7 +66,7 @@ function calculateEntropy() {
         const totalEntropyEl = qs$('#total-entropy');
         const populationUniqEl = qs$('#population-uniqueness');
 
-        totalEntropyEl.textContent = totalBits.toFixed(2);
+        totalEntropyEl.textContent = totalBits.toFixed(0);
         populationUniqEl.textContent = 5890 + Math.round(-Math.log2(filterProbabilities['_default']) * Math.LOG10E) - Math.round(totalBits * Math.LOG10E);
     } catch (e) {
         console.log(e);
