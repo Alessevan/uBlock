@@ -4,9 +4,11 @@
 
 Ce projet propose l'affichage du nombre de bits d'information qu'un utilisateur peut utiliser divulguer en utilisant une liste de blocage. Chaque liste se voit attribuer une probabilité de présence et le nombre de bits et calculé en fonction de la probabilité des listes actives. Plus le nombre de bits d'information est élevé plus la configuration de l'utilisateur est unique. Le projet permet également la randomization des listes de blocage des pays.
 
+Les modifications effectuées sont entre deux balises contenant `8INF886` afin de pouvoir atteindre rapidement les fonctionnalités que nous avons implémentées.
+
 Le projet se compile à l'aide de la commande `make`. Un fichier d'extension Firefox est alors disponible au chemin `dist/build/uBlock0.firefox.xpi`. 
 
-Avant de l'ajouter à Firefox, il faut au préalable avoir [Firefox Nightly](https://download-installer.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-151.0a1.en-US.linux-x86_64.tar.xz) et avoir passé `xpinstall.signatures.required` à `false` dans `about:config`.
+Avant de l'ajouter à Firefox, il faut au préalable avoir Firefox Nightly ([linux x86_64]](https://download-installer.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-151.0a1.en-US.linux-x86_64.tar.xz)) et avoir passé `xpinstall.signatures.required` à `false` dans `about:config`.
 Ensuite, il suffit de glisser-déposer le fichier `.xpi` dans Firefox ou d'aller dans `about:addons` puis dans l'engrenage et cliquer sur `Install Add-on From File...` et de sélectionner le fichier `.xpi`.
 
 Rendez-vous dans les paramètres de uBlock puis dans `Filter lists`.
